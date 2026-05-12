@@ -30,7 +30,10 @@ fg.author({
 })
 
 fg.link(
+    href="fg.link(
     href="https://leclerctroppoforte.github.io/RENOVA-COMPETITION-FEED/feed.xml",
+    rel="self"
+)",
     rel="self"
 )
 
