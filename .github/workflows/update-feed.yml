@@ -1,0 +1,39 @@
+name: Update Instagram Feed
+
+on:
+  workflow_dispatch:
+
+  schedule:
+    - cron: "*/15 * * * *"
+
+permissions:
+  contents: write
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - run: pip install -r requirements.txt
+
+      - run: python instagram_atom.py
+
+      - run: |
+
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+
+          git add feed.xml
+
+          git commit -m "Update feed" || echo "No changes"
+
+          git push
