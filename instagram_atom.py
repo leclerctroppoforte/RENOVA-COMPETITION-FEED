@@ -1,27 +1,34 @@
 import requests
+import re
+import json
+
 from datetime import datetime
 from feedgen.feed import FeedGenerator
 
 USERNAME = "renova_competition"
 
-URL = f"https://i.instagram.com/api/v1/users/web_profile_info/?username={USERNAME}"
+url = f"https://www.instagram.com/{USERNAME}/"
 
 headers = {
-    "User-Agent": "Mozilla/5.0",
-    "x-ig-app-id": "936619743392459"
+    "User-Agent": "Mozilla/5.0"
 }
 
-response = requests.get(URL, headers=headers)
+response = requests.get(url, headers=headers)
 
-data = response.json()
+html = response.text
 
-user = data["data"]["user"]
+match = re.search(r'window\._sharedData = (.*?);</script>', html)
 
-posts = user["edge_owner_to_timeline_media"]["edges"]
+if not match:
+    raise Exception("Instagram data non trovati")
+
+data = json.loads(match.group(1))
+
+posts = data["entry_data"]["ProfilePage"][0]["graphql"]["user"]["edge_owner_to_timeline_media"]["edges"]
 
 fg = FeedGenerator()
 
-fg.id(f"https://www.instagram.com/{USERNAME}/")
+fg.id(url)
 
 fg.title(f"{USERNAME} Instagram Feed")
 
@@ -35,7 +42,7 @@ fg.link(
 )
 
 fg.link(
-    href=f"https://www.instagram.com/{USERNAME}/",
+    href=url,
     rel="alternate"
 )
 
