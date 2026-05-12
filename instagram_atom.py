@@ -27,7 +27,7 @@ fg.id(url)
 fg.title(f"{USERNAME} Instagram Feed")
 fg.author({'name': USERNAME})
 fg.link(href=url, rel='alternate')
-fg.link(href='https://YOUR_USERNAME.github.io/renova-instagram-feed/feed.xml', rel='self')
+fg.link(href='https://leclerctroppoforte.github.io/renova-instagram-feed/feed.xml', rel='self')
 fg.language('it')
 
 for post in posts[:12]:
