@@ -1,14 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-  <title>RENOVA Feed</title>
-  <updated>2026-05-12T00:00:00Z</updated>
+Due to cost considerations, we will gradually restrict access to rsshub.app for some feed readers.
 
-  <entry>
-    <title>Test Post</title>
-    <link href="https://instagram.com/renova_competition"/>
-    <id>1</id>
-    <updated>2026-05-12T00:00:00Z</updated>
-    <summary>Test feed funzionante</summary>
-  </entry>
+Please note that rsshub.app is intended for testing purposes only and should not be used as a production RSS source.
 
-</feed>
+For stable and long-term usage, we strongly recommend self-hosting RSSHub.
+Official deployment guide: https://docs.rsshub.app/deploy/
+
+Thank you for your understanding.
