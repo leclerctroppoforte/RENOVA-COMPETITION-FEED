@@ -1,22 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
+Due to cost considerations, we will gradually restrict access to rsshub.app for some feed readers.
 
-<title>Renova Competition Instagram</title>
+Please note that rsshub.app is intended for testing purposes only and should not be used as a production RSS source.
 
-<updated>2026-05-12T00:00:00Z</updated>
+For stable and long-term usage, we strongly recommend self-hosting RSSHub.
+Official deployment guide: https://docs.rsshub.app/deploy/
 
-<entry>
-
-<title>Feed aggiornato correttamente</title>
-
-<link href="https://www.instagram.com/renova_competition/" />
-
-<id>renova-feed</id>
-
-<summary>
-GitHub Pages funziona.
-</summary>
-
-</entry>
-
-</feed>
+Thank you for your understanding.
