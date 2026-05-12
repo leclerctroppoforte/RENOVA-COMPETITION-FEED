@@ -1,33 +1,41 @@
 import requests
-from feedgen.feed import FeedGenerator
-from datetime import datetime
+import re
 import json
+from datetime import datetime
+from feedgen.feed import FeedGenerator
 
 USERNAME = "renova_competition"
 
-url = f"https://www.instagram.com/{USERNAME}/"
+URL = f"https://www.instagram.com/{USERNAME}/?__a=1&__d=dis"
 
 headers = {
     "User-Agent": "Mozilla/5.0"
 }
 
-html = requests.get(url, headers=headers).text
+response = requests.get(URL, headers=headers)
 
-start = html.find('window._sharedData = ')
-end = html.find(';</script>', start)
+data = response.json()
 
-json_data = html[start + 21:end]
-data = json.loads(json_data)
+user = data["graphql"]["user"]
 
-posts = data["entry_data"]["ProfilePage"][0]["graphql"]["user"]["edge_owner_to_timeline_media"]["edges"]
+posts = user["edge_owner_to_timeline_media"]["edges"]
 
 fg = FeedGenerator()
 
-fg.id(url)
+fg.id(f"https://www.instagram.com/{USERNAME}/")
 fg.title(f"{USERNAME} Instagram Feed")
 fg.author({'name': USERNAME})
-fg.link(href=url, rel='alternate')
-fg.link(href='https://leclerctroppoforte.github.io/renova-instagram-feed/feed.xml', rel='self')
+
+fg.link(
+    href=f'https://leclerctroppoforte.github.io/renova-instagram-feed/feed.xml',
+    rel='self'
+)
+
+fg.link(
+    href=f"https://www.instagram.com/{USERNAME}/",
+    rel='alternate'
+)
+
 fg.language('it')
 
 for post in posts[:12]:
@@ -55,7 +63,11 @@ for post in posts[:12]:
     <![CDATA[
         <p>{caption}</p>
         <img src="{image_url}" width="100%" />
-        <p><a href="{post_url}">Apri su Instagram</a></p>
+        <p>
+            <a href="{post_url}">
+                Apri su Instagram
+            </a>
+        </p>
     ]]>
     """
 
@@ -66,6 +78,7 @@ for post in posts[:12]:
     fe.link(href=post_url)
     fe.updated(updated)
     fe.summary(caption)
+
     fe.content(content, type='html')
 
 fg.atom_file('feed.xml')
