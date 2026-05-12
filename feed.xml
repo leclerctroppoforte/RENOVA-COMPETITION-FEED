@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>RENOVA Feed</title>
+  <updated>2026-05-12T00:00:00Z</updated>
+
+  <entry>
+    <title>Test Post</title>
+    <link href="https://instagram.com/renova_competition"/>
+    <id>1</id>
+    <updated>2026-05-12T00:00:00Z</updated>
+    <summary>Test feed funzionante</summary>
+  </entry>
+
+</feed>
