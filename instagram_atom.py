@@ -22,23 +22,24 @@ posts = user["edge_owner_to_timeline_media"]["edges"]
 fg = FeedGenerator()
 
 fg.id(f"https://www.instagram.com/{USERNAME}/")
+
 fg.title(f"{USERNAME} Instagram Feed")
 
 fg.author({
-    'name': USERNAME
+    "name": USERNAME
 })
 
 fg.link(
-    href='https://leclerctroppoforte.github.io/renova-instagram-feed/feed.xml',
-    rel='self'
+    href="https://leclerctroppoforte.github.io/RENOVA-COMPETITION-FEED/feed.xml",
+    rel="self"
 )
 
 fg.link(
     href=f"https://www.instagram.com/{USERNAME}/",
-    rel='alternate'
+    rel="alternate"
 )
 
-fg.language('it')
+fg.language("it")
 
 for post in posts[:12]:
 
@@ -63,11 +64,13 @@ for post in posts[:12]:
 
     content = f"""
     <p>{caption}</p>
+
     <img src="{image_url}" width="100%" />
+
     <p>
-        <a href="{post_url}">
-            Apri su Instagram
-        </a>
+      <a href="{post_url}">
+        Apri su Instagram
+      </a>
     </p>
     """
 
@@ -85,8 +88,8 @@ for post in posts[:12]:
 
     fe.summary(caption)
 
-    fe.content(content, type='html')
+    fe.content(content, type="html")
 
-fg.atom_file('feed.xml')
+fg.atom_file("feed.xml")
 
 print("Feed aggiornato!")
