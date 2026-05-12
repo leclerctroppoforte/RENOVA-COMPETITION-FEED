@@ -62,18 +62,6 @@ for post in posts[:12]:
         node["taken_at_timestamp"]
     )
 
-    content = f"""
-    <p>{caption}</p>
-
-    <img src="{image_url}" width="100%" />
-
-    <p>
-      <a href="{post_url}">
-        Apri su Instagram
-      </a>
-    </p>
-    """
-
     fe = fg.add_entry()
 
     fe.id(post_url)
@@ -88,8 +76,21 @@ for post in posts[:12]:
 
     fe.summary(caption)
 
-    fe.content(content, type="html")
+    fe.content(
+        f"""
+        <img src="{image_url}" />
+
+        <p>{caption}</p>
+
+        <p>
+            <a href="{post_url}">
+                Apri su Instagram
+            </a>
+        </p>
+        """,
+        type="html"
+    )
 
 fg.atom_file("feed.xml")
 
-print("Feed aggiornato!")
+print("feed.xml generato!")
